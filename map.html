@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <title>SORT WARS - map</title>
+        <link rel="stylesheet" type="text/css" href="map.css" />
+    </head>
+    <body>
+        <div class="map_background">
+            <div class="">
+                <div class="planet_title" id="start_title">Mission1</div>
+                <img class="planet" id="start" src="./map/start.png" title="start"
+                    onclick="click_mission1()"    
+                >
+            </div>
+            <div class="">
+                <div class="planet_title" id="planet1_title">Mission2</div>
+                <img class="planet" id="planet_1" src="./map/planet_1.png" title="planet_1"
+                    onclick="click_mission2()"    
+
+                >
+            </div>
+            <div class="">
+                <div class="planet_title" id="planet2_title">Mission3</div>
+                <img class="planet" id="planet_2" src="./map/planet_2.png" title="planet_2"
+                    onclick="click_mission3()"    
+                    
+                >
+            </div>
+        </div>
+        
+        <script>
+            function click_mission1(){
+                window.location.href = "mission1.html";
+            }
+            function click_mission2(){
+                window.location.href = "mission2.html";
+            }
+            function click_mission3(){
+                window.location.href = "mission3.html";
+            }
+        </script>
+    </body>
+</html>

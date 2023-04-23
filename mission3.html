@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <title>SORT WARS - mission3</title>
+        <link rel="stylesheet" type="text/css" href="mission3.css" />
+    </head>
+    <body>
+        <!--bgm-->
+        <audio src="universe_bgm.mp3" loop id="bgm"></audio>
+        <div class="music">
+            <img class="music_off" id="music_icon" src="music_off.png" alt="music_off" title="click to unmute"
+                 width="28" height="28" onclick="music_click();"
+            >
+        </div>
+        <!--Cobie-->
+        <img class="main_character" id="cobie" src="./cobie.png" title="cobie">
+        <!-- background -->
+        <div id="background1_info">
+            <img class="background" src="background1_info.png">
+        </div>
+        <div class="invisable" id="background1_animation">
+            <img class="background" src="background1_animation.png">
+        </div>
+        <div class="invisable" id="background1_test">
+            <img class="background" src="background1_test.png">
+        </div>
+        <!-- click label on top -->
+        <div class="click_block" id="click_info" onclick="click_info()">INFO</div>
+        <div class="click_block" id="click_animation" onclick="click_animation()">ANIMATION</div>
+        <div class="click_block" id="click_test" onclick="click_test()">TEST</div>
+        <!-- info -->
+        <div class="background_block" id="info_block">
+            <div id="info_title">INSERTION SORT</div>
+            <p id="info_content">
+                插入排序法，原理是將未排序的資料逐一與已排序的資料做比較，找到對的位置並插入到已排序的資料中。
+            </p>
+        </div>
+        <!-- animation -->
+        <div class="background_block invisable" id="anima_block">
+            <div class="anima_info">Sort in descending order</div>
+            <div id="num_blocks">
+                <div class="num_block" id="num_10">10</div>
+                <div class="num_block" id="num_20">20</div>
+                <div class="num_block" id="num_30">30</div>
+                <div class="num_block" id="num_40">40</div>
+            </div>
+            <div class="slider_container">
+                <input type="range" min="0" max="9" value="0" class="slider" id="anima_slider"
+                        oninput="slider_change()">
+            </div>
+            <div class="anima_code" id="anima_code">
+                <div>void insertionSort(int a[]){</div>
+                <div>&emsp;for(int i=1;i&lt;a.length();i++){</div>
+                <div>&emsp;&emsp;&emsp;target=i;</div>
+                <div>&emsp;&emsp;&emsp;for(int j=i-1;j&gt;=0;j--){</div>
+                <div id="if">&emsp;&emsp;&emsp;&emsp;&emsp;if(a[target] &gt; a[j]){</div>
+                <div>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;swap(a[target],a[j]);</div>
+                <div>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;target=j;</div>
+                <div>&emsp;&emsp;&emsp;&emsp;&emsp;}</div>
+                <div>&emsp;&emsp;&emsp;}</div>
+                <div>&emsp;}</div>
+                <div>}</div>
+            </div>
+            <div class="iterator_block">
+                <div class="iterator" id="iterator">initial</div>
+            </div>
+            <div class="pointer" id="pointer_j">j<br>&darr;</div>
+            <div class="pointer" id="pointer_target">target<br>&darr;</div>
+            <!--hint-->
+            <div 
+                class="hint_button"
+                onmouseover="hint_over(this);"
+                onmouseout="hint_out(this);"
+            >hint</div>
+            <div class="hint" id="anima_hint">
+                <div class="content">
+                    <p class="hint_text">
+                        1) 拉動滑桿觀察排序過程
+                        <br>2) 箭頭指向j和target當前的位置
+                        <br>3) 數字變為紅底代表該位置的值已經確定
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!--test-->
+        <div class="test_block invisable" id="test_block">
+            <img class="speak_bubble" id="speak_bubble" src="speak_bubble.png" alt="speak_bubble">
+            <p class="speak_text" id="speak_text">
+                幫我把箱子
+                <br>由小排到大
+            </p>
+            <div class="boss_block">
+                <img class="boss" id="boss" src="boss.png" alt="boss">
+            </div>
+
+            <img class="mission1_test" id="mission1_test" src="mission1_test.png" alt="test_box">
+            <div class="test_code" id="test_code">
+                <div>void insertionSort(int a[]){</div>
+                <div>&emsp;for(int i=<span class="blank" id="blank_1">&emsp;1.&emsp;</span>;i&lt;a.length();i++){</div>
+                <div>&emsp;&emsp;&emsp;target=i;</div>
+                <div>&emsp;&emsp;&emsp;for(int j=<span class="blank" id="blank_2">&emsp;2.&emsp;</span>;j&gt;=0;j--){</div>
+                <div id="if">&emsp;&emsp;&emsp;&emsp;&emsp;if(a[target] <span class="blank" id="blank_3">&emsp;3.&emsp;</span> a[j]){</div>
+                <div>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;swap(a[target],a[j]);</div>
+                <div>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;target=j;</div>
+                <div>&emsp;&emsp;&emsp;&emsp;&emsp;}</div>
+                <div>&emsp;&emsp;&emsp;}</div>
+                <div>&emsp;}</div>
+                <div>}</div>
+            </div>
+            <div class="answer_block">
+                <div class="ans" id="ans1" onclick="ans_1(this)">0</div>
+                <div class="ans" id="ans2" onclick="ans_2(this)">&lt;</div>
+                <div class="ans" id="ans3" onclick="ans_3(this)">i</div>
+                <div class="ans" id="ans4" onclick="ans_4(this)">i+1</div>
+                <div class="ans" id="ans5" onclick="ans_5(this)">i-1</div>
+                <div class="ans" id="ans6" onclick="ans_6(this)">==</div>
+                <div class="ans" id="ans7" onclick="ans_7(this)">1</div>
+                <div class="ans" id="ans8" onclick="ans_8(this)">&gt;</div>
+            </div>
+        </div>
+        <script>
+            function music_click(){
+                var img = document.getElementById("music_icon");
+                var bgm = document.getElementById("bgm");
+                if(img.className == "music_on"){
+                    bgm.pause();
+                    img.src = "music_off.png";
+                    img.title = "click to unmute";
+                    img.classList.toggle("music_on");
+                    img.classList.toggle("music_off");
+                }else{
+                    bgm.play();
+                    img.src = "music_on.png";
+                    img.title = "click to mute";
+                    img.classList.toggle("music_on");
+                    img.classList.toggle("music_off");
+                }
+            }
+            function click_info(){
+                /*background pic*/
+                var info = document.getElementById("background1_info");
+                var anima = document.getElementById("background1_animation");
+                var test = document.getElementById("background1_test");
+                if(info.classList.contains("invisable")){
+                    info.classList.toggle("invisable");
+                }
+                if(!anima.classList.contains("invisable")){
+                    anima.classList.toggle("invisable");
+                }
+                if(!test.classList.contains("invisable")){
+                    test.classList.toggle("invisable");
+                }
+                /*text on the tag*/
+                var info_text = document.getElementById("click_info");
+                var anima_text = document.getElementById("click_animation");
+                var test_text = document.getElementById("click_test");
+                info_text.style.color = "#d4f3ff";
+                anima_text.style.color = "#354279";
+                test_text.style.color = "#354279";
+                /*info content*/
+                var info_block = document.getElementById("info_block");
+                if(info_block.classList.contains("invisable")){
+                    info_block.classList.toggle("invisable");
+                }
+                /*animation content*/
+                var anima_block = document.getElementById("anima_block");
+                if(!anima_block.classList.contains("invisable")){
+                    anima_block.classList.toggle("invisable");
+                }
+                /* test content*/
+                var test_block = document.getElementById("test_block");
+                if(!test_block.classList.contains("invisable")){
+                    test_block.classList.toggle("invisable");
+                }
+            }
+            function click_animation(){
+                /*background pic*/
+                var info = document.getElementById("background1_info");
+                var anima = document.getElementById("background1_animation");
+                var test = document.getElementById("background1_test");
+                if(!info.classList.contains("invisable")){
+                    info.classList.toggle("invisable");
+                }
+                if(anima.classList.contains("invisable")){
+                    anima.classList.toggle("invisable");
+                }
+                if(!test.classList.contains("invisable")){
+                    test.classList.toggle("invisable");
+                }
+                /*text on the tag*/
+                var info_text = document.getElementById("click_info");
+                var anima_text = document.getElementById("click_animation");
+                var test_text = document.getElementById("click_test");
+                info_text.style.color = "#354279";
+                anima_text.style.color = "#d4f3ff";
+                test_text.style.color = "#354279";
+                /*info content*/
+                var info_block = document.getElementById("info_block");
+                if(!info_block.classList.contains("invisable")){
+                    info_block.classList.toggle("invisable");
+                }
+                /*animation content*/
+                var anima_block = document.getElementById("anima_block");
+                if(anima_block.classList.contains("invisable")){
+                    anima_block.classList.toggle("invisable");
+                }
+                /* test content*/
+                var test_block = document.getElementById("test_block");
+                if(!test_block.classList.contains("invisable")){
+                    test_block.classList.toggle("invisable");
+                }
+            }
+            function click_test(){
+                /*background pic*/
+                var info = document.getElementById("background1_info");
+                var anima = document.getElementById("background1_animation");
+                var test = document.getElementById("background1_test");
+                if(!info.classList.contains("invisable")){
+                    info.classList.toggle("invisable");
+                }
+                if(!anima.classList.contains("invisable")){
+                    anima.classList.toggle("invisable");
+                }
+                if(test.classList.contains("invisable")){
+                    test.classList.toggle("invisable");
+                }
+                /*text on the tag*/
+                var info_text = document.getElementById("click_info");
+                var anima_text = document.getElementById("click_animation");
+                var test_text = document.getElementById("click_test");
+                info_text.style.color = "#354279";
+                anima_text.style.color = "#354279";
+                test_text.style.color = "#d4f3ff";
+                /*info content*/
+                var info_block = document.getElementById("info_block");
+                if(!info_block.classList.contains("invisable")){
+                    info_block.classList.toggle("invisable");
+                }
+                /*animation content*/
+                var anima_block = document.getElementById("anima_block");
+                if(!anima_block.classList.contains("invisable")){
+                    anima_block.classList.toggle("invisable");
+                }
+                /* test content*/
+                var test_block = document.getElementById("test_block");
+                if(test_block.classList.contains("invisable")){
+                    test_block.classList.toggle("invisable");
+                }
+            }
+            function slider_change(){
+                var val = document.getElementById("anima_slider").value;
+                if(val==0){
+                    state0();
+                }else if(val==1){
+                    state1();
+                }else if(val==2){
+                    state2();
+                }else if(val==3){
+                    state3();
+                }else if(val==4){
+                    state4();
+                }else if(val==5){
+                    state5();
+                }else if(val==6){
+                    state6();
+                }else if(val==7){
+                    state7();
+                }else if(val==8){
+                    state8();
+                }else if(val==9){
+                    state9();
+                }
+            }
+            var num10 = document.getElementById("num_10");
+            var num20 = document.getElementById("num_20");
+            var num30 = document.getElementById("num_30");
+            var num40 = document.getElementById("num_40");
+            var pointer_j = document.getElementById("pointer_j");
+            var pointer_target = document.getElementById("pointer_target");
+            var iterator = document.getElementById("iterator");
+            var if_color = document.getElementById("if");
+            function state0(){
+                /*num change position*/
+                num10.style.left = "170px";
+                num20.style.left = "60px";
+                num30.style.left = "390px";
+                num40.style.left = "280px";
+                num10.style.backgroundColor = "rgb(0, 53, 127)";
+                num20.style.backgroundColor = "rgb(0, 53, 127)";
+                num30.style.backgroundColor = "rgb(0, 53, 127)";
+                num40.style.backgroundColor = "rgb(0, 53, 127)";
+                /*pointer*/
+                pointer.style.display = "none";
+                /*iterator*/
+                iterator.innerHTML = "initial";
+                /*if statement*/
+                var if_color = document.getElementById("if");
+                if_color.style.backgroundColor = "";
+                if_color.style.color = "rgb(0, 62, 96)";
+            }
+            function state1(){
+                /*num change position*/
+                num10.style.left = "170px";
+                num20.style.left = "60px";
+                num30.style.left = "390px";
+                num40.style.left = "280px";
+                num10.style.backgroundColor = "rgb(0, 53, 127)";
+                num20.style.backgroundColor = "rgb(229, 0, 0)";
+                num30.style.backgroundColor = "rgb(0, 53, 127)";
+                num40.style.backgroundColor = "rgb(0, 53, 127)";
+                /*pointer*/
+                pointer_j.style.display = "flex";
+                pointer_j.style.left = "95px";
+                pointer_target.style.display = "flex";
+                pointer_target.style.left = "175px";
+                /*iterator*/
+                iterator.innerHTML = "i=1&emsp;j=0";
+                /*if statement*/
+                if_color.style.backgroundColor = "#d42222";
+                if_color.style.color = "#dfdfdf";
+            }
+            function state2(){
+                /*num change position*/
+                num10.style.left = "170px";
+                num20.style.left = "60px";
+                num30.style.left = "390px";
+                num40.style.left = "280px";
+                num10.style.backgroundColor = "rgb(229, 0, 0)";
+                num20.style.backgroundColor = "rgb(229, 0, 0)";
+                num30.style.backgroundColor = "rgb(0, 53, 127)";
+                num40.style.backgroundColor = "rgb(0, 53, 127)";
+                /*pointer*/
+                pointer_j.style.display = "flex";
+                pointer_j.style.left = "205px";
+                pointer_target.style.display = "flex";
+                pointer_target.style.left = "285px";
+                /*iterator*/
+                iterator.innerHTML = "i=2&emsp;j=1";
+                /*if statement*/
+                if_color.style.backgroundColor = "#0062b2";
+                if_color.style.color = "#dfdfdf";
+            }
+            function state3(){
+                /*num change position*/
+                num10.style.left = "280px";
+                num20.style.left = "60px";
+                num30.style.left = "390px";
+                num40.style.left = "170px";
+                num10.style.backgroundColor = "rgb(229, 0, 0)";
+                num20.style.backgroundColor = "rgb(229, 0, 0)";
+                num30.style.backgroundColor = "rgb(0, 53, 127)";
+                num40.style.backgroundColor = "rgb(0, 53, 127)";
+                /*pointer*/
+                pointer_j.style.display = "flex";
+                pointer_j.style.left = "175px";
+                pointer_target.style.display = "flex";
+                pointer_target.style.left = "210px";
+                /*iterator*/
+                iterator.innerHTML = "swap(a[target],a[1])";
+                /*if statement*/
+                if_color.style.backgroundColor = "#0062b2";
+                if_color.style.color = "#dfdfdf";
+            }
+            function state4(){
+                /*num change position*/
+                num10.style.left = "280px";
+                num20.style.left = "60px";
+                num30.style.left = "390px";
+                num40.style.left = "170px";
+                num10.style.backgroundColor = "rgb(229, 0, 0)";
+                num20.style.backgroundColor = "rgb(229, 0, 0)";
+                num30.style.backgroundColor = "rgb(0, 53, 127)";
+                num40.style.backgroundColor = "rgb(0, 53, 127)";
+                /*pointer*/
+                pointer_j.style.display = "flex";
+                pointer_j.style.left = "95px";
+                pointer_target.style.display = "flex";
+                pointer_target.style.left = "175px";
+                /*iterator*/
+                iterator.innerHTML = "i=2&emsp;j=0";
+                /*if statement*/
+                if_color.style.backgroundColor = "#0062b2";
+                if_color.style.color = "#dfdfdf";
+            }
+            function state5(){
+                /*num change position*/
+                num10.style.left = "280px";
+                num20.style.left = "170px";
+                num30.style.left = "390px";
+                num40.style.left = "60px";
+                num10.style.backgroundColor = "rgb(229, 0, 0)";
+                num20.style.backgroundColor = "rgb(229, 0, 0)";
+                num30.style.backgroundColor = "rgb(0, 53, 127)";
+                num40.style.backgroundColor = "rgb(229, 0, 0)";
+                /*pointer*/
+                pointer_j.style.display = "none";
+                pointer_target.style.display = "none";
+                /*iterator*/
+                iterator.innerHTML = "swap(a[target],a[0])";
+                /*if statement*/
+                if_color.style.backgroundColor = "#0062b2";
+                if_color.style.color = "#dfdfdf";
+            }
+            function state6(){
+                /*num change position*/
+                num10.style.left = "280px";
+                num20.style.left = "170px";
+                num30.style.left = "390px";
+                num40.style.left = "60px";
+                num10.style.backgroundColor = "rgb(229, 0, 0)";
+                num20.style.backgroundColor = "rgb(229, 0, 0)";
+                num30.style.backgroundColor = "rgb(0, 53, 127)";
+                num40.style.backgroundColor = "rgb(229, 0, 0)";
+                /*pointer*/
+                pointer_j.style.display = "flex";
+                pointer_j.style.left = "315px";
+                pointer_target.style.display = "flex";
+                pointer_target.style.left = "395px";
+                /*iterator*/
+                iterator.innerHTML = "i=3&emsp;j=2";
+                /*if statement*/
+                if_color.style.backgroundColor = "#0062b2";
+                if_color.style.color = "#dfdfdf";
+            }
+            function state7(){
+                /*num change position*/
+                num10.style.left = "390px";
+                num20.style.left = "170px";
+                num30.style.left = "280px";
+                num40.style.left = "60px";
+                num10.style.backgroundColor = "rgb(229, 0, 0)";
+                num20.style.backgroundColor = "rgb(229, 0, 0)";
+                num30.style.backgroundColor = "rgb(0, 53, 127)";
+                num40.style.backgroundColor = "rgb(229, 0, 0)";
+                /*pointer*/
+                pointer_j.style.display = "flex";
+                pointer_j.style.left = "205px";
+                pointer_target.style.display = "flex";
+                pointer_target.style.left = "285px";
+                /*iterator*/
+                iterator.innerHTML = "i=3&emsp;j=1";
+                /*if statement*/
+                if_color.style.backgroundColor = "#0062b2";
+                if_color.style.color = "#dfdfdf";
+            }
+            function state8(){
+                /*num change position*/
+                num10.style.left = "390px";
+                num20.style.left = "280px";
+                num30.style.left = "170px";
+                num40.style.left = "60px";
+                num10.style.backgroundColor = "rgb(229, 0, 0)";
+                num20.style.backgroundColor = "rgb(229, 0, 0)";
+                num30.style.backgroundColor = "rgb(0, 53, 127)";
+                num40.style.backgroundColor = "rgb(229, 0, 0)";
+                /*pointer*/
+                pointer_j.style.display = "flex";
+                pointer_j.style.left = "95px";
+                pointer_target.style.display = "flex";
+                pointer_target.style.left = "175px";
+                /*iterator*/
+                iterator.innerHTML = "i=3&emsp;j=0";
+                /*if statement*/
+                if_color.style.backgroundColor = "#d42222";
+                if_color.style.color = "#dfdfdf";
+            }
+            function state9(){
+                /*num change position*/
+                num10.style.left = "390px";
+                num20.style.left = "280px";
+                num30.style.left = "170px";
+                num40.style.left = "60px";
+                num10.style.backgroundColor = "rgb(229, 0, 0)";
+                num20.style.backgroundColor = "rgb(229, 0, 0)";
+                num30.style.backgroundColor = "rgb(229, 0, 0)";
+                num40.style.backgroundColor = "rgb(229, 0, 0)";
+                /*pointer*/
+                pointer_j.style.display = "none";
+                pointer_target.style.display = "none";
+                /*iterator*/
+                iterator.innerHTML = "sorted";
+                /*if statement*/
+                if_color.style.backgroundColor = "rgb(124, 235, 255)";
+                if_color.style.color = "rgb(0, 62, 96)";
+            }
+            function hint_over(elem){
+                elem.style.backgroundColor = "rgba(123, 123, 123, 0.963)";
+                var hint_block = document.getElementById("anima_hint");
+                hint_block.classList.toggle("active");
+            }
+            function hint_out(elem){
+                elem.style.backgroundColor = "rgba(186, 186, 186, 0.963)";
+                var hint_block = document.getElementById("anima_hint");
+                hint_block.classList.toggle("active");
+            }
+            /*test*/
+            var question_count = 1;
+            var ans1 = document.getElementById("ans1");
+            var ans2 = document.getElementById("ans2");
+            var ans3 = document.getElementById("ans3");
+            var ans4 = document.getElementById("ans4");
+            var ans5 = document.getElementById("ans5");
+            var ans6 = document.getElementById("ans6");
+            var ans7 = document.getElementById("ans7");
+            var ans8 = document.getElementById("ans8");
+            function ans_1(elem){
+                if(question_count==1){
+                    elem.style.backgroundColor = "#ff0101";
+                    elem.style.color = "#ffffff";
+                }else if(question_count==2){
+                    elem.style.backgroundColor = "#ff0101";
+                    elem.style.color = "#ffffff";
+                }else if(question_count==3){
+                    elem.style.backgroundColor = "#ff0101";
+                    elem.style.color = "#ffffff";
+                }
+            }
+            function ans_2(elem){
+                if(question_count==1){
+                    elem.style.backgroundColor = "#ff0101";
+                    elem.style.color = "#ffffff";
+                }else if(question_count==2){
+                    elem.style.backgroundColor = "#ff0101";
+                    elem.style.color = "#ffffff";
+                }else if(question_count==3){
+                    elem.style.backgroundColor = "#ff0101";
+                    elem.style.color = "#ffffff";
+                }
+            }
+            function ans_3(elem){
+                if(question_count==1){
+                    elem.style.backgroundColor = "#ff0101";
+                    elem.style.color = "#ffffff";
+                }else if(question_count==2){
+                    elem.style.backgroundColor = "#ff0101";
+                    elem.style.color = "#ffffff";
+                }else if(question_count==3){
+                    elem.style.backgroundColor = "#ff0101";
+                    elem.style.color = "#ffffff";
+                }
+            }
+            function ans_4(elem){
+                if(question_count==1){
+                    elem.style.backgroundColor = "#ff0101";
+                    elem.style.color = "#ffffff";
+                }else if(question_count==2){
+                    elem.style.backgroundColor = "#ff0101";
+                    elem.style.color = "#ffffff";
+                }else if(question_count==3){
+                    elem.style.backgroundColor = "#ff0101";
+                    elem.style.color = "#ffffff";
+                }
+            }            
+            function ans_5(elem){
+                if(question_count==1){
+                    elem.style.backgroundColor = "#ff0101";
+                    elem.style.color = "#ffffff";
+                }else if(question_count==2){
+                    elem.style.display = "none";
+                    var blank = document.getElementById("blank_2");
+                    blank.innerHTML = "i-1";
+                    blank.style.border = "none";
+                    blank.style.color = "#ff0101";
+                    blank.style.fontWeight = "bold";
+                    blank.style.fontSize = "30px";
+                    blank.style.backgroundColor = "transparent";
+                    question_count++;
+                    ans1.style.backgroundColor = "rgb(191, 225, 255)";
+                    ans1.style.color = "rgba(0, 39, 110, 0.961)";
+                    ans2.style.backgroundColor = "rgb(191, 225, 255)";
+                    ans2.style.color = "rgba(0, 39, 110, 0.961)";
+                    ans3.style.backgroundColor = "rgb(191, 225, 255)";
+                    ans3.style.color = "rgba(0, 39, 110, 0.961)";
+                    ans4.style.backgroundColor = "rgb(191, 225, 255)";
+                    ans4.style.color = "rgba(0, 39, 110, 0.961)";
+                    ans6.style.backgroundColor = "rgb(191, 225, 255)";
+                    ans6.style.color = "rgba(0, 39, 110, 0.961)";
+                    ans8.style.backgroundColor = "rgb(191, 225, 255)";
+                    ans8.style.color = "rgba(0, 39, 110, 0.961)";
+                }
+            }            
+            function ans_6(elem){
+                if(question_count==1){
+                    elem.style.backgroundColor = "#ff0101";
+                    elem.style.color = "#ffffff";
+                }else if(question_count==2){
+                    elem.style.backgroundColor = "#ff0101";
+                    elem.style.color = "#ffffff";
+                }else if(question_count==3){
+                    elem.style.backgroundColor = "#ff0101";
+                    elem.style.color = "#ffffff";
+                }
+            }            
+            function ans_7(elem){
+                if(question_count==1){
+                    elem.style.display = "none";
+                    var blank = document.getElementById("blank_1");
+                    blank.innerHTML = "1";
+                    blank.style.border = "none";
+                    blank.style.color = "#ff0101";
+                    blank.style.fontWeight = "bold";
+                    blank.style.fontSize = "30px";
+                    blank.style.backgroundColor = "transparent";
+                    question_count++;
+                    ans1.style.backgroundColor = "rgb(191, 225, 255)";
+                    ans1.style.color = "rgba(0, 39, 110, 0.961)";
+                    ans2.style.backgroundColor = "rgb(191, 225, 255)";
+                    ans2.style.color = "rgba(0, 39, 110, 0.961)";
+                    ans3.style.backgroundColor = "rgb(191, 225, 255)";
+                    ans3.style.color = "rgba(0, 39, 110, 0.961)";
+                    ans4.style.backgroundColor = "rgb(191, 225, 255)";
+                    ans4.style.color = "rgba(0, 39, 110, 0.961)";
+                    ans5.style.backgroundColor = "rgb(191, 225, 255)";
+                    ans5.style.color = "rgba(0, 39, 110, 0.961)";
+                    ans6.style.backgroundColor = "rgb(191, 225, 255)";
+                    ans6.style.color = "rgba(0, 39, 110, 0.961)";
+                    ans8.style.backgroundColor = "rgb(191, 225, 255)";
+                    ans8.style.color = "rgba(0, 39, 110, 0.961)";
+                }
+            }
+            function ans_8(elem){
+                if(question_count==1){
+                    elem.style.backgroundColor = "#ff0101";
+                    elem.style.color = "#ffffff";
+                }else if(question_count==2){
+                    elem.style.backgroundColor = "#ff0101";
+                    elem.style.color = "#ffffff";
+                }else if(question_count==3){
+                    elem.style.display = "none";
+                    var blank = document.getElementById("blank_3");
+                    blank.innerHTML = ">";
+                    blank.style.border = "none";
+                    blank.style.color = "#ff0101";
+                    blank.style.fontWeight = "bold";
+                    blank.style.fontSize = "30px";
+                    blank.style.backgroundColor = "transparent";
+                    question_count++;
+                    ans1.style.backgroundColor = "rgb(191, 225, 255)";
+                    ans1.style.color = "rgba(0, 39, 110, 0.961)";
+                    ans2.style.backgroundColor = "rgb(191, 225, 255)";
+                    ans2.style.color = "rgba(0, 39, 110, 0.961)";
+                    ans3.style.backgroundColor = "rgb(191, 225, 255)";
+                    ans3.style.color = "rgba(0, 39, 110, 0.961)";
+                    ans4.style.backgroundColor = "rgb(191, 225, 255)";
+                    ans4.style.color = "rgba(0, 39, 110, 0.961)";
+                    ans6.style.backgroundColor = "rgb(191, 225, 255)";
+                    ans6.style.color = "rgba(0, 39, 110, 0.961)";
+                    /*congrats*/
+                    var cobie = document.getElementById("cobie");
+                    cobie.style.zIndex = "100";
+                    cobie.style.top = "150px";
+                    cobie.style.left = "150px";
+                    cobie.style.transform = "rotate(0deg)";
+                    cobie.style.width = "350px";
+                    cobie.style.height = "350px";
+                    var boss = document.getElementById("boss");
+                    boss.style.display = "none";
+                    var bubble = document.getElementById("speak_bubble");
+                    bubble.style.left = "450px";
+                    bubble.style.top = "100px";
+                    bubble.style.zIndex = "100";
+                    var text = document.getElementById("speak_text");
+                    text.innerHTML = "Congrats!";
+                    text.style.zIndex = "101";
+                    text.style.left = "560px";
+                    text.style.top = "150px";
+                    text.style.fontSize = "50px";
+                }
+            }
+        </script>
+    </body>
+</html>

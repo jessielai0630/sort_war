@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <title>SORT WARS - menu</title>
+        <link rel="stylesheet" type="text/css" href="menu.css" />
+    </head>
+    <body>  
+        <div class="title">SORT WARS</div>
+        <div>
+            <div 
+                class="button"
+                onmouseover="over(this);"onmouseout="out(this);"
+                onmousedown="down(this);"onmouseup="up(this);"
+                onclick="click_about()"
+            >ABOUT</div>
+            <div 
+                class="button"
+                onmouseover="over(this);"onmouseout="out(this);"
+                onmousedown="down(this);"onmouseup="up(this);"
+                onclick="click_start()"
+            >START</div>
+        </div>
+        <!-- about popup -->
+        <div class="popup" id="popup_about">
+            <div class="content">
+                <div class="close_btn" onclick="click_about()">&times;</div>
+                <h2>Introduction</h2>
+                <p>This is a game dedicated to help people who want to learn about basic sorting algorithms. 
+                    Have fun with Cobie and finish your adventure!</p>
+            </div>
+        </div>
+        <script>
+            function over(elem){
+                elem.style.backgroundColor = "#ddcccc";
+            }
+            function out(elem){
+                elem.style.backgroundColor = "#f0ffff";
+            }
+            function down(elem){
+                elem.style.fontWeight = "bold";
+            }
+            function up(elem){
+                elem.style.fontWeight = "normal";
+            }
+            function click_about(){
+                var pop = document.getElementById("popup_about");
+                pop.classList.toggle("active");
+            }
+            function click_start(){
+                window.location.href = "map.html";
+            }
+        </script>
+    </body>
+</html>

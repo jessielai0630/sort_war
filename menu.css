@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=MuseoModerno:wght@400;500&display=swap');
+body{
+    background-color: #110024
+}
+
+.title{
+    color: #f0f8ff;
+    font-weight: bond;
+    font-family: 'MuseoModerno', cursive;
+    font-size: 10vw;
+    text-align: center; 
+    user-select: none;
+    margin-top: 10%;    
+}
+
+.button{
+    background-color: #f0ffff;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    margin-top: 30px;
+    border-style: outset;
+    border-width: 5px;
+    width: 150px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 30px;
+    font-family: 'MuseoModerno', cursive;
+    user-select: none;
+    cursor: pointer;
+}
+
+.popup .content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transition: all 300ms ease-in-out;
+    transform: translate(-50%, -50%) scale(0);
+    background-color: #062948;
+    color: #ffffff;
+    width: 550px;
+    height: 350px;
+    border-radius: 5%;
+    border-color: #95999c;
+    border-width: 5px;
+    border-style: solid;
+    text-align: center;
+    padding: 37px;
+    box-sizing: border-box;
+    font-family: 'MuseoModerno', cursive;
+    font-size: 23px;
+    user-select: none;
+}
+
+.popup .close_btn{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 30px;
+    height: 30px;
+    background-color: #f0f8ff;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #110024;
+}
+
+.popup.active .content{
+    transition: all 300ms ease-in-out;
+    transform: translate(-50%, -50%) scale(1);
+}
